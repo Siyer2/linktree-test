@@ -38,5 +38,6 @@ class ShowsList extends Classic {
 }
 
 export {
-    ShowsList
+    ShowsList,
+    ShowStatus
 }

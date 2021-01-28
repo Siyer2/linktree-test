@@ -37,5 +37,6 @@ class MusicPlayer extends Classic {
 }
 
 export {
-    MusicPlayer
+    MusicPlayer,
+    MusicPlatform
 }
