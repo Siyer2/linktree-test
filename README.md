@@ -19,6 +19,6 @@ Like I said, sorry if I misunderstood something, I'm happy to take on feedback :
 
 ## Extendability (please have a look at the TODO comments, but I'll write them here too):
 - Move endpoints out of the index file
-- Write a sign up/sign in endpoint using JWT. Get the user ID from the bearer token rather than as a body param
+- Write a sign up/sign in endpoint and have private endpoints such as /generateLink use a JWT token. Get the user ID from the bearer token rather than as a body param
 - Verify that the random ID is not already in use 
 - Upload newLink to a storage
