@@ -3,7 +3,7 @@ enum ResultStatus {
     Failure,
 }
 
-enum LinkType {
+enum LinkTypes {
     Classic,
     ShowsList,
     MusicPlayer
@@ -11,5 +11,5 @@ enum LinkType {
 
 export {
     ResultStatus,
-    LinkType
+    LinkTypes
 }

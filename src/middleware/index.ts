@@ -6,7 +6,7 @@ import {
 import { Classic } from '../linkClasses/Classic';
 import { ShowsList } from '../linkClasses/ShowsList';
 import { MusicPlayer } from '../linkClasses/MusicPlayer';
-import { ResultStatus, LinkType } from '../utilities/enums';
+import { ResultStatus, LinkTypes } from '../utilities/enums';
 
 /**
  * Middleware to determine whether the input is valid
@@ -15,6 +15,12 @@ import { ResultStatus, LinkType } from '../utilities/enums';
  * @param next 
  */
 const validateInputs = function (request: Request, response: Response, next: NextFunction) {
+    // Ensure the userId is in the body
+    if (!request.body.userId) {
+        return response.status(400).send('userId is a required parameter');
+    }
+
+    // Validate the other inputs
     const linkType: number = request.body.linkType;
     const linkSpecificData: any = request.body.linkSpecificData;
 
@@ -24,17 +30,17 @@ const validateInputs = function (request: Request, response: Response, next: Nex
     };
 
     switch (linkType) {
-        case LinkType.Classic:
+        case LinkTypes.Classic:
             let classicLink = new Classic();
             validationResponse = classicLink.validate(linkSpecificData);
             break;
 
-        case LinkType.ShowsList:
+        case LinkTypes.ShowsList:
             let showsListLink = new ShowsList();
             validationResponse = showsListLink.validate(linkSpecificData);
             break;
 
-        case LinkType.MusicPlayer:
+        case LinkTypes.MusicPlayer:
             let musicPlayerLink = new MusicPlayer();
             validationResponse = musicPlayerLink.validate(linkSpecificData);
             break;

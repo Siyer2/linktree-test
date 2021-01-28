@@ -11,7 +11,7 @@ class MusicPlayer extends Classic {
      * Determine whether a MusicPlayer link can be generated with the given input
      * @param input - linkSpecificData that comes from the request body
      */
-    validate(input: any): { result: ResultStatus; error?: String } {
+    validate(input: any): { result: ResultStatus; error?: string } {
         // Check that the show status is there
         let classicValidation = super.validate(input);
         if (classicValidation.result == ResultStatus.Failure) {
@@ -31,7 +31,7 @@ class MusicPlayer extends Classic {
         };
     }
 
-    generateLink(input: any): String {
+    generateLink(input: any): string {
         return 'https://syamiyer.com';
     }
 }

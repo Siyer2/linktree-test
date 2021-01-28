@@ -1,12 +1,15 @@
-import { ResultStatus } from "../utilities/enums";
-import { LinkType } from "../utilities/interfaces";
+import { getRandomId } from "../helperFunctions";
+import { LinkTypes, ResultStatus } from "../utilities/enums";
+import { LinkType, Link } from "../utilities/interfaces";
 
 class Classic implements LinkType {
+    baseURL = 'https://fakelinktree.com/';
+
     /**
      * Determine whether a Classic link can be generated with the given input
      * @param input - linkSpecificData that comes from the request body
      */
-    validate(input: any): { result: ResultStatus; error?: String } {
+    validate(input: any): { result: ResultStatus; error?: string } {
         // Check that title is there
         if (!input.title) {
             return {
@@ -28,8 +31,24 @@ class Classic implements LinkType {
         };
     }
 
-    generateLink(input: any): String {
-        return 'https://syamiyer.com';
+    /**
+     * Generate a new link
+     * @param input 
+     * @param userId 
+     */
+    generateLink(input: any, userId: string): string {
+        const linkId = getRandomId();
+        let newLink: Link = {
+            linkId: linkId,
+            userId: userId,
+            dateCreated: new Date(),
+            linkType: LinkTypes.Classic,
+            title: input.title
+        };
+        console.log('Creating link', newLink);
+        // TODO: Upload newLink to a storage
+
+        return `${this.baseURL}/?linkId=${linkId}`;
     }
 }
 
