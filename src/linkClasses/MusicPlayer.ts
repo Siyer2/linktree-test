@@ -1,4 +1,6 @@
-import { ResultStatus } from "../utilities/enums";
+import { getRandomId } from "../helperFunctions";
+import { LinkTypes, ResultStatus } from "../utilities/enums";
+import { Link } from "../utilities/interfaces";
 import { Classic } from "./Classic";
 
 enum MusicPlatform {
@@ -31,8 +33,27 @@ class MusicPlayer extends Classic {
         };
     }
 
-    generateLink(input: any): string {
-        return 'https://syamiyer.com';
+    /**
+     * Generate a new link
+     * @param input 
+     * @param userId 
+     */
+    generateLink(input: any, userId: string): string {
+        const linkId = getRandomId();
+        let newLink: Link = {
+            linkId: linkId,
+            userId: userId,
+            dateCreated: new Date(),
+            linkType: LinkTypes.MusicPlayer,
+            title: input.title,
+            linkSpecificData: {
+                musicPlatform: input.musicPlatform
+            }
+        };
+        console.log('Creating link', newLink);
+        // TODO: Upload newLink to a storage
+
+        return `${this.baseURL}?linkId=${linkId}`;
     }
 }
 
