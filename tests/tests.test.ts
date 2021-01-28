@@ -65,6 +65,17 @@ describe('Validation Middleware for ShowList', function () {
         expect(validationResult.error).to.equal(`Invalid show: {"showStatus":4,"venue":"Sydney"}`);
         expect(validationResult.result).to.equal(ResultStatus.Failure);
     });
+
+    it('Successfully create show link', function () {
+        let validationResult = showsList.validate({
+            "title": "New show!",
+            "shows": [
+                { "showStatus": 0, "venue": "Sydney" }
+            ]
+        });
+
+        expect(validationResult.result).to.equal(ResultStatus.Success);
+    });
 });
 
 describe('Validation Middleware for MusicPlayer', function () {
