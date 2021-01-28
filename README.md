@@ -3,6 +3,23 @@
 - npm install
 - npm run start
 
+# Endpoint
+- POST /generateLink
+- Requires: 'linkType' - this is an int indicating the type (0 for classic, 1 for shows list and 2 for music). I'd imagine the frontend would also use an enum to keep track of this, which is why it was an int
+- Requires: 'userId' - this can be any string
+- Requires: 'linkSpecificData' - this is a dictionary
+
+curl example of successfully creating a Classic link: 
+curl --location --request POST 'http://localhost:8080/generateLink' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "linkType": 0, 
+    "linkSpecificData": {
+        "title": "New post!"
+    }, 
+    "userId": "myUserId"
+}'
+ 
 # To test
 - npm install
 - npm run test

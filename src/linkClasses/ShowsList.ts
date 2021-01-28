@@ -25,7 +25,7 @@ class ShowsList extends Classic {
         if (![ShowStatus.SoldOut, ShowStatus.NotOnSale, ShowStatus.OnSale].includes(input.showStatus)) {
             return {
                 result: ResultStatus.Failure,
-                error: "A 'showStatus' must have values of 0, 1 or 2"
+                error: "'showStatus' in 'linkSpecificData' must have values of 0, 1 or 2"
             };
         }
 

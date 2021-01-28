@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha -r ts-node/register tests/**/*.test.ts",
-    "start": "tsc && node src/index.js"
+    "start": "ts-node ./src/index.ts"
   },
   "keywords": [],
   "author": "",

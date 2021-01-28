@@ -14,7 +14,7 @@ class Classic implements LinkType {
         if (!input.title) {
             return {
                 result: ResultStatus.Failure,
-                error: "'title' is a required parameter"
+                error: "'title' in 'linkSpecificData' is required"
             };
         }
 

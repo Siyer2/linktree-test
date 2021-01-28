@@ -24,7 +24,7 @@ class MusicPlayer extends Classic {
         if (![MusicPlatform.Spotify, MusicPlatform.AppleMusic].includes(input.musicPlatform)) {
             return {
                 result: ResultStatus.Failure,
-                error: "Unsupported music platform"
+                error: "Unsupported music platform: Invalid 'musicPlatform' in 'linkSpecificData'"
             };
         }
 
