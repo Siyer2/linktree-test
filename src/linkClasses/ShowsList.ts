@@ -47,9 +47,9 @@ class ShowsList extends Classic {
             dateCreated: new Date(),
             linkType: LinkTypes.ShowsList,
             title: input.title,
-            linkSpecificData: {
-                showStatus: input.showStatus
-            }
+            // linkSpecificData: {
+            //     showStatus: input.showStatus
+            // }
         };
         console.log('Creating link', newLink);
         // TODO: Upload newLink to a storage

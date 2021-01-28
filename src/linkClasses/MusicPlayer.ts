@@ -8,6 +8,15 @@ enum MusicPlatform {
     AppleMusic,
 }
 
+interface SongLink {
+    platform: MusicPlatform,
+    platformLink: string
+}
+
+interface MusicLink extends Link {
+    songLinks: SongLink[]
+}
+
 class MusicPlayer extends Classic {
     /**
      * Determine whether a MusicPlayer link can be generated with the given input
@@ -20,11 +29,26 @@ class MusicPlayer extends Classic {
             return classicValidation;
         }
 
-        // Check that the linked platform is supported
-        if (![MusicPlatform.Spotify, MusicPlatform.AppleMusic].includes(input.musicPlatform)) {
+        // Ensure that the songLinks parameter is there
+        if (!input.songLinks || !Array.isArray(input.songLinks) || input.songLinks.length === 0) {
             return {
                 result: ResultStatus.Failure,
-                error: "Unsupported music platform: Invalid 'musicPlatform' in 'linkSpecificData'"
+                error: "A non-empty 'songLinks' array is a required parameter when creating a MusicPlayer link"
+            };
+        }
+
+        // Loop through each song link and ensure that it is valid
+        let error = "";
+        input.songLinks.forEach((songLink: any) => {
+            if (![MusicPlatform.Spotify, MusicPlatform.AppleMusic].includes(songLink.platform)
+                || (!songLink.platformLink)) {
+                error = songLink;
+            };
+        });
+        if (error) {
+            return {
+                result: ResultStatus.Failure,
+                error: `Invalid songLink: ${JSON.stringify(error)}`
             };
         }
 
@@ -40,16 +64,15 @@ class MusicPlayer extends Classic {
      */
     generateLink(input: any, userId: string): string {
         const linkId = getRandomId();
-        let newLink: Link = {
+        let newLink: MusicLink = {
             linkId: linkId,
             userId: userId,
             dateCreated: new Date(),
             linkType: LinkTypes.MusicPlayer,
             title: input.title,
-            linkSpecificData: {
-                musicPlatform: input.musicPlatform
-            }
-        };
+            songLinks: input.songLinks
+        }
+
         console.log('Creating link', newLink);
         // TODO: Upload newLink to a storage
 

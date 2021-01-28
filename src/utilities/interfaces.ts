@@ -9,7 +9,6 @@ interface Link {
     linkType: LinkTypes,
     userId: String,
     dateCreated: Date,
-    linkSpecificData?: any
 }
 
 interface LinkType {

@@ -88,21 +88,39 @@ describe('Validation Middleware for MusicPlayer', function () {
         expect(validationResult.result).to.equal(ResultStatus.Failure);
     });
 
-    it('Unsupported Music Platform', function () {
+    it('Creating a music player without the song link parameter', function () {
         let validationResult = musicPlayer.validate({
-            'title': 'New song!',
-            'musicPlatform': 'Tidal'
+            'title': 'New song without links!!',
         });
 
+        expect(validationResult.error).to.equal("A non-empty 'songLinks' array is a required parameter when creating a MusicPlayer link");
         expect(validationResult.result).to.equal(ResultStatus.Failure);
     });
 
-    it('Successfully create a music link', function () {
+    it('Unsupported music platform', function () {
         let validationResult = musicPlayer.validate({
-            'title': 'New song!',
-            'musicPlatform': MusicPlatform.Spotify
+            "title": "New post!",
+            "songLinks": [
+                { "platform": 3, "platformLink": "spotify.com/song" }
+
+            ]
+        });
+
+        expect(validationResult.error).to.equal('Invalid songLink: {"platform":3,"platformLink":"spotify.com/song"}');
+        expect(validationResult.result).to.equal(ResultStatus.Failure);
+    });
+
+    it('Successfully create music link', function () {
+        let validationResult = musicPlayer.validate({
+            "title": "New song!",
+            "songLinks": [
+                { "platform": 0, "platformLink": "spotify.com/song" },
+                { "platform": 1, "platformLink": "apple.com/song" }
+            ]
         });
 
         expect(validationResult.result).to.equal(ResultStatus.Success);
-    })
+    });
+
+
 });
