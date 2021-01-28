@@ -3,6 +3,12 @@ import { MusicPlayer } from '../linkClasses/MusicPlayer';
 import { ShowsList } from '../linkClasses/ShowsList';
 import { LinkTypes } from '../utilities/enums';
 
+/**
+ * Based on the linkType, generate a link
+ * @param linkType 
+ * @param linkSpecificData 
+ * @param userId 
+ */
 const generateLink = function (linkType: LinkTypes, linkSpecificData: any, userId: string): string {
     let link = '';
 
