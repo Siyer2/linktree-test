@@ -10,7 +10,6 @@ enum ShowStatus {
 }
 
 interface Show {
-    date: Date,
     showStatus: ShowStatus,
     venue: String
 }
@@ -38,11 +37,18 @@ class ShowsList extends Classic {
             };
         }
 
-        // Check that the show is one of the available options
-        if (![ShowStatus.SoldOut, ShowStatus.NotOnSale, ShowStatus.OnSale].includes(input.showStatus)) {
+        // Loop through each show and ensure that it is valid
+        let error = '';
+        input.shows.forEach((show: any) => {
+            if (![ShowStatus.NotOnSale, ShowStatus.OnSale, ShowStatus.SoldOut].includes(show.showStatus)
+                || (!show.venue)) {
+                error = show;
+            };
+        });
+        if (error) {
             return {
                 result: ResultStatus.Failure,
-                error: "'showStatus' in 'linkSpecificData' must have values of 0, 1 or 2"
+                error: `Invalid show: ${JSON.stringify(error)}`
             };
         }
 

@@ -53,6 +53,18 @@ describe('Validation Middleware for ShowList', function () {
         expect(validationResult.error).to.equal(`A non-empty 'shows' array is a required parameter when creating a Shows link`);
         expect(validationResult.result).to.equal(ResultStatus.Failure);
     });
+
+    it('Invalid show', function () {
+        let validationResult = showsList.validate({
+            "title": "New show!",
+            "shows": [
+                { "showStatus": 4, "venue": "Sydney" }
+            ]
+        });
+
+        expect(validationResult.error).to.equal(`Invalid show: {"showStatus":4,"venue":"Sydney"}`);
+        expect(validationResult.result).to.equal(ResultStatus.Failure);
+    });
 });
 
 describe('Validation Middleware for MusicPlayer', function () {
