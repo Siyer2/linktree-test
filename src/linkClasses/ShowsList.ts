@@ -19,23 +19,13 @@ class ShowsList extends Classic {
             return classicValidation;
         }
 
-        /*
-        // Check that title is there
-        if (!input.title) {
+        // Check that the show is one of the available options
+        if (![ShowStatus.SoldOut, ShowStatus.NotOnSale, ShowStatus.OnSale].includes(input.showStatus)) {
             return {
                 result: ResultStatus.Failure,
-                error: "Link Type 'Classic' requires parameter 'title'"
+                error: "A 'showStatus' must have values of 0, 1 or 2"
             };
         }
-
-        // Check that title is less than 144 characters
-        if (input.title.length > 144) {
-            return {
-                result: ResultStatus.Failure,
-                error: "A title must not be longer than 144 characters"
-            };
-        }
-        */
 
         return {
             result: ResultStatus.Success
