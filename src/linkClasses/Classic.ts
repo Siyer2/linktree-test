@@ -2,6 +2,10 @@ import { ResultStatus } from "../utilities/enums";
 import { LinkType } from "../utilities/interfaces";
 
 class Classic implements LinkType {
+    /**
+     * Determine whether a Classic link can be generated with the given input
+     * @param input - linkSpecificData that comes from the request body
+     */
     validate(input: any): { result: ResultStatus; error?: String } {
         // Check that title is there
         if (!input.title) {

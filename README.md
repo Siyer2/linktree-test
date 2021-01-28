@@ -1,7 +1,7 @@
 # Linktree tech test
 # To run
 - npm install
-- tsc && node index.js
+- ts-node ./src/index.ts
 
 # To test
 - npm install
