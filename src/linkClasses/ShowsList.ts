@@ -9,16 +9,33 @@ enum ShowStatus {
     OnSale,
 }
 
+interface Show {
+    date: Date,
+    showStatus: ShowStatus,
+    venue: String
+}
+
+interface ShowLink extends Link {
+    shows: Show[]
+}
+
 class ShowsList extends Classic {
     /**
      * Determine whether a ShowsList link can be generated with the given input
      * @param input - linkSpecificData that comes from the request body
      */
     validate(input: any): { result: ResultStatus; error?: string } {
-        // Check that the show status is there
         let classicValidation = super.validate(input);
         if (classicValidation.result == ResultStatus.Failure) {
             return classicValidation;
+        }
+
+        // Check that there is a shows parameter
+        if (!input.shows || !Array.isArray(input.shows) || input.shows.length === 0) {
+            return {
+                result: ResultStatus.Failure,
+                error: "A non-empty 'shows' array is a required parameter when creating a Shows link"
+            };
         }
 
         // Check that the show is one of the available options
@@ -41,16 +58,15 @@ class ShowsList extends Classic {
      */
     generateLink(input: any, userId: string): string {
         const linkId = getRandomId();
-        let newLink: Link = {
+        let newLink: ShowLink = {
             linkId: linkId,
             userId: userId,
             dateCreated: new Date(),
             linkType: LinkTypes.ShowsList,
             title: input.title,
-            // linkSpecificData: {
-            //     showStatus: input.showStatus
-            // }
-        };
+            shows: input.shows
+        }
+
         console.log('Creating link', newLink);
         // TODO: Upload newLink to a storage
 

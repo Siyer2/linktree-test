@@ -45,30 +45,13 @@ describe('Validation Middleware for ShowList', function () {
         expect(validationResult.result).to.equal(ResultStatus.Failure);
     });
 
-    it('Show list without a showStatus', function () {
+    it('Fail creating a shows link without the shows parameter', function () {
         let validationResult = showsList.validate({
-            "title": "New show without any other info!"
+            "title": "New post!"
         });
 
+        expect(validationResult.error).to.equal(`A non-empty 'shows' array is a required parameter when creating a Shows link`);
         expect(validationResult.result).to.equal(ResultStatus.Failure);
-    });
-
-    it('Show with invalid showStatus', function () {
-        let validationResult = showsList.validate({
-            "title": "New show without any other info!",
-            "showStatus": "somethingWrong"
-        });
-
-        expect(validationResult.result).to.equal(ResultStatus.Failure);
-    });
-
-    it('Successfully create show', function () {
-        let validationResult = showsList.validate({
-            "title": "New show without any other info!",
-            "showStatus": ShowStatus.OnSale
-        });
-
-        expect(validationResult.result).to.equal(ResultStatus.Success);
     });
 });
 
