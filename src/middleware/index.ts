@@ -6,13 +6,7 @@ import {
 import { Classic } from '../linkClasses/Classic';
 import { ShowsList } from '../linkClasses/ShowsList';
 import { MusicPlayer } from '../linkClasses/MusicPlayer';
-import { ResultStatus } from '../utilities/enums';
-
-enum LinkType {
-    Classic,
-    ShowsList,
-    MusicPlayer
-}
+import { ResultStatus, LinkType } from '../utilities/enums';
 
 /**
  * Middleware to determine whether the input is valid
