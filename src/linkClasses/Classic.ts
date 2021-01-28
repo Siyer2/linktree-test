@@ -48,7 +48,7 @@ class Classic implements LinkType {
         console.log('Creating link', newLink);
         // TODO: Upload newLink to a storage
 
-        return `${this.baseURL}/?linkId=${linkId}`;
+        return `${this.baseURL}?linkId=${linkId}`;
     }
 }
 
