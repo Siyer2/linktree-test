@@ -3,9 +3,9 @@ import {
 } from './enums';
 
 interface LinkType {
-    validation: (input: any) => {
+    validate: (input: any) => {
         result: ResultStatus,
-        message?: String,
+        error?: String,
     };
 
     generateLink: (input: any) => String;

@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 const app = express();
 const port = 8080;
 
+// TODO: Move endpoints out of the index file
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello world!");
 });
