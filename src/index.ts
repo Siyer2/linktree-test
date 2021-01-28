@@ -18,3 +18,7 @@ app.post('/generateLink', validateInputs, (request: Request, response: Response)
 app.listen(port, () => {
     console.log(`Listening on port ${port}...`);
 });
+
+export {
+    app
+}
