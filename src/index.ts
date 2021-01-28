@@ -4,12 +4,12 @@ import bodyParser from 'body-parser';
 const app = express();
 const port = 8080;
 
+app.use(bodyParser.json({ strict: false }));
+
 // TODO: Move endpoints out of the index file
 app.get("/", (request: Request, response: Response) => {
     response.send("Hello world!");
 });
-
-app.use(bodyParser.json({ strict: false }));
 
 app.post('/generateLink', validateInputs, (request: Request, response: Response) => {
     try {
