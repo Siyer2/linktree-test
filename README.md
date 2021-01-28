@@ -9,16 +9,21 @@
 - Requires: 'userId' - this can be any string
 - Requires: 'linkSpecificData' - this is a dictionary
 
-curl example of successfully creating a Classic link: 
+curl example of successfully creating a song link: \
 curl --location --request POST 'http://localhost:8080/generateLink' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "linkType": 0, 
+    "linkType": 2, 
     "linkSpecificData": {
-        "title": "New post!"
-    }, 
+            "title": "New song!",
+            "songLinks": [
+                { "platform": 0, "platformLink": "spotify.com/song" },
+                { "platform": 1, "platformLink": "apple.com/song" }
+            ]
+        }, 
     "userId": "myUserId"
 }'
+
  
 # To test
 - npm install
@@ -26,8 +31,8 @@ curl --location --request POST 'http://localhost:8080/generateLink' \
 
 ## Assumptions I made (note: please let me know if these assumptions are incorrect and I can amend my code)
 - All links (including the show list link and music player link) also require a title under 144 characters
-- Each music player link MUST have a supported platform
-- Each show MUST have a showStatus (e.g. sold out, on sale or not yet on sale)
+- Each song link MUST have a supported platform
+- Each show link MUST have a showStatus (e.g. sold out, on sale or not yet on sale)
 - Wasn't sure what the query params for a classic link meant. Did that mean the client could set a query param in the generated link?
 - I didn't store the created links (in a file or a DB) as the spec said not to use a database (but you can see what my schema would've looked like if you go to src/utilities/interfaces.ts and see the Link interface)
 - As there is no storage, there is no function to get the data by userId or dateCreated
